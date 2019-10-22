@@ -1,0 +1,40 @@
+ <!Doctype>
+ <html>
+<meta charset="UTF-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+    	function printtable()
+    	{
+    		 $.ajax({
+        				url:'http://api.revth.com/rank',
+        				type:'get',
+        				datatype:'json',
+        				success:function(res)
+        				{
+            				console.log(res);
+                            //在console中查看数据
+            				$.each(res,function(index,object){
+               				$("#table").append("<tr><td>"+object.player_id+"</td><td>"+object.score+"</td><td>"+object.name+"</td></tr>");
+           	 				});
+            				           				
+						}
+					})
+    	}
+    </script>
+    <head>
+<title> hello world</title>
+</head>
+<body>
+<p >原理<span></span></p>
+<input type="button" onclick="printtable()" value="获得"/>
+<table id="table" border=1>
+    <tr>
+        <td>
+           申请
+        </td>
+    </tr>
+
+</table>
+</body>
+    </html>
