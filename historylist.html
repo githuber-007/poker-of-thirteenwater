@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<head>
+	<meta charset="utf-8">
+	<title>对战历史</title>
+	<link href="http://www.gametest.com/favicon.ico" rel="shortcut icon">
+</head>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	var str;
+	var id;
+	var No=0;
+	var token;
+	function gettoken() {
+		str=window.location.search;
+		str=JSON.stringify(str);
+		var s=str.substring(8,str.length-1);
+		var s1=s.split("&player_id=")
+		 token=s1[0];
+		id=s1[1];
+		alert(token);
+		getpage(0);
+	}
+	function getpage(No)
+	{
+		$.ajax({
+
+			url:"http://api.revth.com/history",
+			type:"post",
+			datatype:'json',
+			contentType:"application/json",
+			cache: false,
+            xhrFields: {
+                    withCredentials: false
+                },
+           crossDomain: true,
+			headers:
+			{
+				"X-Auth-Token":String(token)
+			},
+			data:JSON.stringify({
+				player_id:Number(id),
+				limit:10,
+				page:No
+			}),
+
+			success:function(res)
+			{
+				console.log(res);
+					if(0==res.status)
+						{
+							console.log(res);
+							var i=0;
+							var data=res.data;
+							$.each(data,function(index,object)
+							{
+								$("#table").append("<tr><td>"+object.id+"</td><td>"+object.card[0]+"</td><td>"+object.card[1]+"</td><td>"+object.card[2]+"</td><td>"+object.score+"</td><td>"+object.timestamp+"</td></tr>");
+							});
+							
+						}
+					else if(res.status==1004)
+						alert("token过期");
+					else
+						alert("?????");
+				
+			},
+			error:function(res)
+			{
+				alert("无此页面");
+			}
+		});
+	}
+	function frontpage()
+	{
+		No--;
+		if(No<0)
+		{
+			alert("前面没东西啦！");
+			No++;
+		}
+		else
+		 getpage(No);
+
+	}
+	function backpage()
+	{
+		No++;
+		getpage(No);
+	}
+	function set()
+	{
+		var Id=document.getElementById("pid").value;
+		Id=Number(Id);
+		document.getElementById("pid").value=Id;
+
+		var limit=document.getElementById("limit").value;
+		limit=Number(limit);
+		document.getElementById("limit").value=limit;
+
+		var page=document.getElementById("page").value;
+		page=Number(page);
+		document.getElementById("page").value=page;
+		return true;
+	}
+</script>
+<style type="text/css">
+#div1{
+ 	border: 1px;
+}
+#table
+{
+	border: 1px;
+	padding: 0;
+	margin: 0 auto;
+}
+</style>
+<body onload="gettoken()">
+<div id="div1">
+	<form action="http://api.revth.com/history" method="get" onsubmit="return set()">
+		请输入：<br>
+		user_id:<input type="text" name="player_id" id="pid"><br>
+		limit:<input type="text" name="limit" id="limit"><br>
+		page:<input type="text" name="page" id="page"><br>
+		<input type="submit" name="d" value="提交">
+	</form>
+</div>
+<div id="div2">
+<table id="table">
+	<tr>
+		<td>
+			战局id
+		</td>
+		<td>前墩</td>
+		<td>中墩</td>
+		<td>后墩</td>
+		<td>得分</td>
+		<td>结算时间</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>

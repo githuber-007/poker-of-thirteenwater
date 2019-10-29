@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+	var token;
+	function gettoken()
+	{
+		var str=window.location.search;
+		var str1=JSON.stringify(str);
+		token=str1.substring(8,str1.length-1);
+		alert("tokennn------------"+token);
+	}
+	function getdetail()
+	{
+		var s=document.getElementById("bid").value;
+		$.ajax({
+			url:"http://api.revth.com/history/"+s,
+			type:'get',
+			datatype:'json',
+			contentType:"Aplication/json",
+			headers:
+			{
+				"X-Auth-Token":token
+			},
+			success:function(res)
+			{
+				var detail=res.data.detail;
+				for(var i=0;i<4;i++)
+				{
+					$("#table").append("<tr><td>"+detail[i].name+"</td><td>"+detail[i].player_id+"</td><td>"+String(detail[i].card)+"</td><td>"+detail[i].score+"</td></tr>");
+				}
+			},
+			error:function(res)
+			{
+				alert("战局Id错误，请新提交");
+			}
+		});
+	}
+</script>
+<style type="text/css">
+	table{
+		    display:table;  
+           width:100%;
+           table-layout:fixed; 
+	} 
+</style>
+<head>
+	<title>历史记录详情</title>
+</head>
+
+<body onload="gettoken()">
+<span><p>战局id：</p><input type="text" id="bid"/></span><br>
+<span><input type="button" name="btn" onclick="getdetail()" value="确认" /></span>
+<table id="table">
+	<tr> 
+		<td >昵称</td>
+		<td >ID<td>
+		<td >手牌</td>
+		<td >最终得分</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,68 @@
+ <!Doctype html>
+ <html>
+<meta charset="UTF-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+    	function printtable()
+    	{
+    		 $.ajax({
+        				url:'http://api.revth.com/rank',
+        				type:'get',
+        				datatype:'json',
+        				success:function(res)
+        				{
+            				console.log(res);
+                            //在console中查看数据
+            				$.each(res,function(index,object){
+               				$("#table").append("<tr><td>"+object.name+"</td><td>"+object.score+"</td><td>"+object.player_id+"</td></tr>");
+           	 				});
+            				           				
+						}
+					})
+    	}
+    </script>
+    <head>
+<style type="text/css">
+td{
+    text-align: center;
+    height: 25%;
+    width: 25%;
+    position: center;
+}
+#div1{
+    position: center;
+    height: 50%;
+    width: 50%;
+    margin: 0 auto;
+    
+}
+#div2
+{
+    height: 50%;
+    width: 50%;
+    margin: 0 auto;
+
+}
+body{
+    background-image: url("http://localhost/www.gametest.com/background.jpg");
+    background-size:100% 100%;
+    background-attachment: fixed;
+}
+</style>
+<title id="title" >排行榜</title>
+</head>
+<body onload="printtable()">
+<div id="div1">
+<table id="table" border=1 margin=0>
+    <caption style="font-size: 30px;">排行榜</caption>
+    <tr>
+        <td>昵称</td>
+        <td>成绩</td>
+        <td>用户ID</td>
+    </tr>
+ </table>
+</div>
+
+</body>
+    </html>

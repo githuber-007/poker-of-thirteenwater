@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<script type="text/javascript">
+	var str;
+	var token;
+	var id;
+	function getres()
+	{
+		str=window.location.search;
+		var s=str.split("%22");
+		token=s[1];
+		id=s[2]; 
+		str=s[1]+s[2];
+	}
+	function begin()
+	{
+		
+		window.open("http://localhost/www.gametest.com/begin.html?token="+token,"_self","menubar=true");
+	}
+	function rank()
+	{
+		
+		window.open("http://localhost/www.gametest.com/test.html","_self","menubar=true");
+	}
+	function historylist()
+	{
+		
+		window.open("http://localhost/www.gametest.com/historylist.html?token="+str,"_self","menubar=true");
+	}
+	function historydetail()
+	{
+		window.open("http://localhost/www.gametest.com/historydetail.html?token="+token,"_self","menubar=true");
+	}
+	function back()
+	{
+		window.open("http://localhost/www.gametest.com/login.html","_self","menubar=true");
+	}
+</script>
+<head>
+	<link href="favicon.ico" rel="shortcut icon">
+	<title>菜单</title>
+</head>
+<style type="text/css">
+button{
+	    top: 50%;
+
+left: 50%;
+
+text-decoration: none;
+
+border: none;
+
+font-size: 25px;
+
+background-color: #f2b4cc;
+
+margin: 0;
+
+padding: 0;
+
+background:
+#25d05000;
+	}
+#div1{
+		text-align: center;
+
+}
+body{
+	background-image: url('http://localhost/www.gametest.com/background.jpg');
+	background-size: 100% 100%;
+	background-attachment: fixed;
+}
+</style>
+<body onload="getres()">
+<div id="div1">
+
+	<button type="button" name="1" onclick="begin()">开始游戏</button><br>
+	<button type="button" name="2" onclick="rank()">排行榜</button><br>
+	<button type="button" name="3" onclick="historylist()">历史对战列表</button><br>
+     <button type="button" name="4" onclick="historydetail()">历史对战详情</button><br>
+     <button type="button" name="5" onclick="back()">注销</button>
+</div>
+
+</body>
+</html>

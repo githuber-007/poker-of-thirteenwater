@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> New Document </title>
+  <meta name="Generator" content="EditPlus">
+  <meta charset="utf-8">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+ </head>
+<script>
+var token;
+var id;
+var str=String(document.location.search);
+function sendcards(){
+	$.ajax({
+		url:"http://api.revth.com/game/submit",
+		headers
+		{
+		"X-Auth-Token":token,
+		"Content-Type":"application/json"
+		}
+		data:JSON.stringify
+		{
+		"id":document.getElementById("id").innerHTML,
+		"card":document.getElementById("cards")
+		}
+		success:function(res)
+		{
+		alert("success");
+		},
+		error:function()
+		{
+		alert("submit error");
+		}
+	});
+	}
+
+	//http://local/?token="sdad"&id="id"
+function getToken
+{
+	
+}
+function getId
+{
+
+}
+</script>
+ <body>
+<div>
+	<input type="text" id="id"><br>
+	<input type="text" id="cards"><br>
+</div>
+ </body>
+</html>

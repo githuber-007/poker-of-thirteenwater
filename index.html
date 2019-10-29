@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	function f()
+	{
+		$.ajax({
+
+			url:"http://api.revth.com/auth/login",
+			type:"POST",
+			datatype:'json',
+			contentType:"application/json;charset=UTF-8",
+			data:JSON.stringify({
+				"username":document.getElementById("name").value,
+				"password":document.getElementById("ptd").value
+			}),
+
+			success:function(res)
+			{
+				console.log(res);
+				alert("用户m");
+					if(0==res.status)
+						{
+							alert("登录成功");
+
+						}
+					else if(res.status==1005)
+						alert("用户名或密码错误");
+					else
+						alert("?????");
+				
+			},
+			error:function(res)
+			{
+				
+				alert();
+			}
+		});
+	}
+</script>
+<head>
+	<title>登录</title>
+</head>
+<body>
+<div>
+	<form>
+		用户名：<input type="text" id="name"/><br>
+		密码：<input type="text" id="ptd"/><br>
+		<input type="button" value="登录" onclick="f()"/><br>
+	    <a border=1 href="file://C:\Users\轮廓线\Desktop\register.html">注册</a>
+	</form>
+</div>
+</body>
+</html>

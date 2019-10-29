@@ -1,0 +1,99 @@
+<!Doctype html>
+<html>
+<meta charset="utf-8">
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+ <head>
+ 	<title>注册</title>
+ </head>
+
+ <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+    	function submidt()
+    	{
+    		
+    		 $.ajax({
+        				url:'http://api.revth.com/auth/register2',
+        				type:'post',
+        				datatype:'json',
+						contentType:"application/json",
+        				data:JSON.stringify({
+        					"username":document.getElementById("user").value,
+        				 	"password":document.getElementById('ptd').value,
+        				 	"student_number":document.getElementById("sno").value,
+        				 	"student_password":document.getElementById("sptd").value
+        				 }),
+        				success:function(res)
+        				{
+            				console.log(res);
+            				alert(document.getElementById('ptd').value);
+                            //在console中查看数据
+            			
+            						if(res.status==0)
+            								{
+            								alert("success,and data.msg=="+obj.data.msg);
+            								window.open("http://localhost/www.gametest.com/login.html","_self","menubar=true");
+            							}
+            						else if(res.status==1002)
+            							alert("Failed,username has been used");
+            						else
+            							alert("else");  				
+						},
+						error:function(res)
+						{
+							if (res.status==1002) 
+							 alert("Failed,username has been used");
+						}
+					})
+    	}
+    </script>
+    <style type="text/css">
+        #div1{
+
+            height: 30px;
+            border: 0px;
+             width: 75%;
+             display: inline-block;
+            line-height: 28px;
+            margin-bottom: 3px;
+            z-index: 1;
+           text-align: left;
+
+        
+        }
+        body{
+            background: url('http://localhost/www.gametest.com/注册.jpg') no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+        form{
+           position: absolute;
+           top:20%;
+           left:40%;
+        }
+        #div2
+        {
+width: 150px;
+height: 30px;
+position: relative;
+top: 20px;
+background-color:
+#2b5753;
+font-size: 20px;
+        }
+    </style>
+ <body>
+ 	<div>
+ 		<form>
+            <div id="div1">
+ 			<span>用户名：<input type="text" id="user"/></span><br>
+ 			<span>密码：<input type="text" id="ptd"/></span><br>
+ 			<span>学号：<input type="text" id="sno"/></span><br>
+ 			<span>教务处密码：<input type="text" id="sptd"/><br></span>
+             </div>
+ 			<div ><input id="div2" type="button" value="提交" onclick="submidt()"/></div>
+ 		</form>
+ 	</div>
+ </body>
+</html>
