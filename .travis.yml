@@ -6,9 +6,9 @@ node_js:
 
 #运行的脚本命令
 script:
-   - npm config set proxy null
-   - npm config set https-proxy null
-   -npm config registry http://registry.cnpmjs.org/
+  - npm config set proxy null
+  - npm config set https-proxy null
+  - npm config registry http://registry.cnpmjs.org/
   - npm run ci
 
 #指定分支，只有指定的分支提交时才会运行脚本
