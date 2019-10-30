@@ -20,7 +20,7 @@
 		var s1=s.split("&player_id=")
 		 token=s1[0];
 		id=s1[1];
-		alert(token);
+		//alert(token);
 		getpage(0);
 	}
 	function getpage(No)
@@ -68,7 +68,10 @@
 			},
 			error:function(res)
 			{
-				alert("无此页面");
+				if(res.status==1004)
+				 alert("登录过期");
+				else
+				 alert("无此页面");
 			}
 		});
 	}
