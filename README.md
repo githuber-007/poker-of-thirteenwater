@@ -3,3 +3,4 @@
 采用本地服务器进行实验，地址名为http://localhost/www.gametest.com;
 进入UI请点击login.html
 [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
+ CODECOV_TOKEN="a2621bf7-4129-4724-b957-debdd773899b"
